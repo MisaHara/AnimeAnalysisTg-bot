@@ -119,7 +119,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 for(User user: users) {
                     prepareAndSendMessage(user.getChatId(), textToSend);
                 }
-            } else if (messageText.contains("Топ:\n")) {
+            } else if (messageText.contains("Топ:\n") && config.getOwnerId()== chatId ) {
                 var textToSend =  parseToUnicode(messageText.substring(messageText.indexOf("1.")));
                 var text2 =  parseToUnicode(messageText.substring(messageText.indexOf("\n2.")));
                 var text3 =  parseToUnicode(messageText.substring(messageText.indexOf("\n3.")));
