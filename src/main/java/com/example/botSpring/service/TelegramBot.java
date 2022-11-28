@@ -409,15 +409,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         sendMessage.setText(s);
         execute(sendMessage);
     }
-    // TOP_TEXT =
-    //                        "1. "+ command + " \n" +
-    //                                "2. нет \n" +
-    //                                "3. нет \n" +
-    //                                "4. нет \n" +
-    //                                "5. нет \n" +
-    //
-    //                                "\nЧтобы изменить топ введите /settings\n";
-    //                prepareAndSendMessage(chatId, TOP_TEXT);
 }
 
 
