@@ -82,19 +82,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     public TelegramBot(BotConfig config) {
         this.config = config;
-        List<BotCommand> listofCommands = new ArrayList<>();
-        listofCommands.add(new BotCommand("/start", "Ввести в функционал"));
-        listofCommands.add(new BotCommand("/register", "Регистрация"));
-        listofCommands.add(new BotCommand("/mydata", "Выдать твои сохраненные данные"));
-        listofCommands.add(new BotCommand("/deletedata", "Удалить твои данные"));
-        listofCommands.add(new BotCommand("/help", "Выдать информацию как использовать этого бота"));
-        listofCommands.add(new BotCommand("/settings", "Установить свои предпочтения"));
-        try{
-            this.execute(new SetMyCommands(listofCommands, new BotCommandScopeDefault(), null));
-        }
-        catch (TelegramApiException e){
-            log.error("Ошибка настройки списка команд бота" + e.getMessage());
-        }
     }
 
     @Override
@@ -144,16 +131,12 @@ public class TelegramBot extends TelegramLongPollingBot {
                         prepareAndSendMessage(chatId, HELP_TEXT);
                         break;
                     case "/register":
-                        /// TODO: 11/24/2022 короче сделать так чтобы был аккаунт
-                        /// TODO: с именем и возрастом а еще чтобы он назывался по другому.
-                        /// TODO: Выдавать свой username и возраст при кнопке да
                         register(chatId);
                         break;
                     case "/deletedata":
                         prepareAndSendMessage(chatId, "Данный функционал пока не работает");
                         break;
                     case "/settings":
-                        // prepareAndSendMessage(chatId, INPUT_TEXT);
                         try {
                             sendMsg(message, INPUT_TEXT);
                         } catch (TelegramApiException e) {
@@ -313,7 +296,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             log.error(ERROR_TEXT + e.getMessage());
         }
     }
-
+    //Ошибки вызываются здесь, в целях сокращения кода и удобочитабельности 
     private void executeMessage(SendMessage message) {
         try {
             execute(message);
@@ -327,6 +310,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         message.setText(textToSend);
         executeMessage(message);
     }
+    //Парсеры
     private static Document getPageOnePiece() throws IOException {
         String url = "https://mangalib.me/one-piece?section=chapters";
         Document page = Jsoup.parse(new URL(url), 3000);
@@ -377,6 +361,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         String allTime = String.valueOf(topMovieElement);
         sendMessage(chatId, allTime);
     }
+    //Информация о пользователе 
     private void Profile(long chatId, String firstname, String lastName, String userName) {
         if (firstname != null) {
             String fName = "Твое имя:" + firstname;
