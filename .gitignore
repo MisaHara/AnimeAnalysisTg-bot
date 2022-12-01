@@ -1,5 +1,6 @@
 application.properties
 HELP.md
+logback.xml
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

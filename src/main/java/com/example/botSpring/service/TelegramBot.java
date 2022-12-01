@@ -82,19 +82,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     public TelegramBot(BotConfig config) {
         this.config = config;
-        List<BotCommand> listofCommands = new ArrayList<>();
-        listofCommands.add(new BotCommand("/start", "Ввести в функционал"));
-        listofCommands.add(new BotCommand("/register", "Регистрация"));
-        listofCommands.add(new BotCommand("/mydata", "Выдать твои сохраненные данные"));
-        listofCommands.add(new BotCommand("/deletedata", "Удалить твои данные"));
-        listofCommands.add(new BotCommand("/help", "Выдать информацию как использовать этого бота"));
-        listofCommands.add(new BotCommand("/settings", "Установить свои предпочтения"));
-        try{
-            this.execute(new SetMyCommands(listofCommands, new BotCommandScopeDefault(), null));
-        }
-        catch (TelegramApiException e){
-            log.error("Ошибка настройки списка команд бота" + e.getMessage());
-        }
     }
 
     @Override
@@ -409,15 +396,4 @@ public class TelegramBot extends TelegramLongPollingBot {
         sendMessage.setText(s);
         execute(sendMessage);
     }
-    // TOP_TEXT =
-    //                        "1. "+ command + " \n" +
-    //                                "2. нет \n" +
-    //                                "3. нет \n" +
-    //                                "4. нет \n" +
-    //                                "5. нет \n" +
-    //
-    //                                "\nЧтобы изменить топ введите /settings\n";
-    //                prepareAndSendMessage(chatId, TOP_TEXT);
 }
-
-
